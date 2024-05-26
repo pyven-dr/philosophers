@@ -8,11 +8,14 @@ INCLUDE_DIR = include
 
 IFLAGS = -I $(INCLUDE_DIR)
 
+SRC_PARSING = parsing.c \
+              ft_atol.c \
+              ft_isdigit.c \
+              check_args.c
+
 SRC = main.c \
-	  parsing.c \
-	  ft_atol.c \
-	  ft_isdigit.c \
-	  check_args.c
+	  $(addprefix parsing/, $(SRC_PARSING)) \
+
 
 BUILD_DIR = .build
 
