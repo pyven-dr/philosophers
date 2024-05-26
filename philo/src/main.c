@@ -11,9 +11,15 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <stdio.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	write(1, "philosophers\n", 13);
-	return(0);
+	t_philo philo_struct;
+
+	if (parsing(argc, argv, &philo_struct) == 1)
+		return (1);
+	printf("nb_philo : %d time_to_die : %d time_to_eat : %d time_to_sleep : %d nb_eat : %d\n", \
+			philo_struct.philo_values[NB_PHILO], philo_struct.philo_values[TIME_TO_DIE], philo_struct.philo_values[TIME_TO_EAT], philo_struct.philo_values[TIME_TO_SLEEP], philo_struct.philo_values[NB_TIME_MUST_EAT]);
+	return (0);
 }
