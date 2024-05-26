@@ -8,7 +8,11 @@ INCLUDE_DIR = include
 
 IFLAGS = -I $(INCLUDE_DIR)
 
-SRC = main.c
+SRC = main.c \
+	  parsing.c \
+	  ft_atol.c \
+	  ft_isdigit.c \
+	  check_args.c
 
 BUILD_DIR = .build
 
