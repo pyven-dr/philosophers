@@ -15,7 +15,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_philo philo_struct;
+	t_philo	philo_struct;
 
 	if (parsing(argc, argv, &philo_struct) == 1)
 		return (1);

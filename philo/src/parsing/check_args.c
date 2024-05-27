@@ -28,7 +28,7 @@ static int	is_arg_num(char *arg)
 
 int	check_args(char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (argv[i] != NULL)

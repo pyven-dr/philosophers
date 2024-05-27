@@ -13,7 +13,7 @@
 #ifndef PHILO_PARSING_H
 # define PHILO_PARSING_H
 
-#include <unistd.h>
+# include <unistd.h>
 
 # define TOO_MUCH_ARGS "Too many arguments need 5 maximum\n"
 # define TOO_FEW_ARGS "Too few arguments need 4 minimum\n"

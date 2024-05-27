@@ -13,7 +13,7 @@
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <unistd.h>
+# include <unistd.h>
 
 # define NB_PHILO 0
 # define TIME_TO_DIE 1
