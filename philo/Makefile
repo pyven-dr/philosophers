@@ -14,6 +14,9 @@ SRC_PARSING = parsing.c \
               check_args.c
 
 SRC = main.c \
+	  get_time.c \
+	  init_philo.c \
+	  init_fork_list.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
 
 
