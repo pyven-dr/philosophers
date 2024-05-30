@@ -62,5 +62,6 @@ int		init_all_philos(t_philo *st_philo, pthread_mutex_t *dead_lock);
 void	*philo_routine(void *arg);
 int		launch_sim(t_philo *st_philo);
 void	free_all_philo(t_philo *st_philo);
+void	*monitor_routine(void *arg);
 
 #endif

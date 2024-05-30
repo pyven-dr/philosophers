@@ -20,6 +20,7 @@ SRC = main.c \
 	  create_thread.c \
 	  philo_routine.c \
 	  free_all_philo.c \
+	  monitor_routine.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
 
 

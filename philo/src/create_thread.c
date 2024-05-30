@@ -28,6 +28,17 @@ int	create_thread(t_philo *st_philo, pthread_mutex_t *start_lock)
 	return (0);
 }
 
+int	create_monitoring(t_philo *st_philo, pthread_mutex_t *start_lock)
+{
+	pthread_t	monitor;
+
+	st_philo->start_lock = start_lock;
+	if (pthread_create(&monitor, NULL, monitor_routine, st_philo) != 0)
+		return (1);
+	pthread_join(monitor, NULL);
+	return (0);
+}
+
 int	join_thread(t_philo *st_philo)
 {
 	int	i;
@@ -54,7 +65,11 @@ int	launch_sim(t_philo *st_philo)
 		pthread_mutex_destroy(&start_lock);
 		return (1);
 	}
-	pthread_mutex_unlock(&start_lock);
+	if (create_monitoring(st_philo, &start_lock) == 1)
+	{
+		join_thread(st_philo);
+		return (1);
+	}
 	join_thread(st_philo);
 	pthread_mutex_destroy(&start_lock);
 	return (0);
