@@ -19,7 +19,7 @@ jobs:
       
     - name: Verify compilation
       run: |
-        if [ ! -f ./philo ]; then
+        if [ ! -f cd philo && ./philo ]; then
           echo "Compilation failed"
           exit 1
         fi
