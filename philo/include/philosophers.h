@@ -35,6 +35,7 @@ typedef struct s_philosopher
 	pthread_t		thread;
 	int				id;
 	int				*philo_values;
+	size_t			start_time;
 	size_t			last_meal;
 	t_fork			*left_fork;
 	t_fork			*righ_fork;
