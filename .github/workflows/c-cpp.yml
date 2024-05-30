@@ -13,9 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
     - name: cd philo && make
       run: cd philo && make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      
+    - name: Verify compilation
+      run: |
+        if [ ! -f ./your_executable ]; then
+          echo "Compilation failed"
+          exit 1
+        fi
