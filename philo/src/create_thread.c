@@ -45,7 +45,8 @@ int	launch_sim(t_philo *st_philo)
 {
 	pthread_mutex_t	start_lock;
 
-	pthread_mutex_init(&start_lock, NULL);
+	if (pthread_mutex_init(&start_lock, NULL) != 0)
+		return (1);
 	pthread_mutex_lock(&start_lock);
 	if (create_thread(st_philo, &start_lock) == 1)
 	{

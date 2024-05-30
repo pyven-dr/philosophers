@@ -24,7 +24,8 @@ int	init_fork_list(t_philo *st_philo)
 	while (i < st_philo->philo_values[NB_PHILO])
 	{
 		fork_list[i].is_taken = false;
-		pthread_mutex_init(&fork_list[i].mutex, NULL);
+		if (pthread_mutex_init(&fork_list[i].mutex, NULL) != 0)
+			return (1);
 		i++;
 	}
 	st_philo->fork_list = fork_list;

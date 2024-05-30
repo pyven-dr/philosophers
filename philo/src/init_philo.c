@@ -30,7 +30,8 @@ int	init_all_philos(t_philo *st_philo, pthread_mutex_t *dead_lock)
 	int	i;
 
 	i = 0;
-	pthread_mutex_init(dead_lock, NULL);
+	if (pthread_mutex_init(dead_lock, NULL) != 0)
+		return (1);
 	st_philo->philo_list = malloc(\
 	sizeof(t_philosopher) * st_philo->philo_values[NB_PHILO]);
 	if (st_philo->philo_list == NULL)
