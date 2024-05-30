@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_routine.c                                    :+:      :+:    :+:   */
+/*   philo_eat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 00:48:55 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/30 00:48:55 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/30 04:57:16 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/30 04:57:16 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "philosophers.h"
-#include <stdio.h>
 
-void	*philo_routine(void *arg)
+int	philo_eat(t_philosopher *philosopher)
 {
-	t_philosopher	*philosopher;
-
-	philosopher = (t_philosopher *)arg;
-	pthread_mutex_lock(philosopher->start_lock);
-	philosopher->last_meal = *philosopher->start_time;
-	pthread_mutex_unlock(philosopher->start_lock);
-	return (NULL);
+	(void)philosopher;
+	return (0);
 }

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_routine.c                                    :+:      :+:    :+:   */
+/*   wait_ms.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 00:48:55 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/30 00:48:55 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/30 05:10:21 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/30 05:10:21 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "philosophers.h"
-#include <stdio.h>
 
-void	*philo_routine(void *arg)
+void	wait_ms(size_t ms)
 {
-	t_philosopher	*philosopher;
+	size_t	start_time;
 
-	philosopher = (t_philosopher *)arg;
-	pthread_mutex_lock(philosopher->start_lock);
-	philosopher->last_meal = *philosopher->start_time;
-	pthread_mutex_unlock(philosopher->start_lock);
-	return (NULL);
+	start_time = get_time();
+	while ((get_time() - start_time) < ms)
+		usleep(100);
 }

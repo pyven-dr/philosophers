@@ -21,6 +21,8 @@ SRC = main.c \
 	  philo_routine.c \
 	  free_all_philo.c \
 	  monitor_routine.c \
+	  philo_eat.c \
+	  wait_ms.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
 
 

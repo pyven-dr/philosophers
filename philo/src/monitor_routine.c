@@ -19,6 +19,7 @@ void	*monitor_routine(void *arg)
 
 	st_philo = (t_philo *)arg;
 	printf("Monitoring thread created at %zu\n", get_time());
+	st_philo->start_time = get_time();
 	pthread_mutex_unlock(st_philo->start_lock);
 	return (NULL);
 }

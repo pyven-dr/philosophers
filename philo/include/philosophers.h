@@ -35,7 +35,7 @@ typedef struct s_philosopher
 	pthread_t		thread;
 	int				id;
 	int				*philo_values;
-	size_t			start_time;
+	size_t			*start_time;
 	size_t			last_meal;
 	t_fork			*left_fork;
 	t_fork			*righ_fork;
@@ -48,6 +48,7 @@ typedef struct s_philosopher
 typedef struct s_philo
 {
 	int				philo_values[5];
+	size_t			start_time;
 	t_philosopher	*philo_list;
 	t_fork			*fork_list;
 	pthread_mutex_t	*dead_lock;
@@ -63,5 +64,6 @@ void	*philo_routine(void *arg);
 int		launch_sim(t_philo *st_philo);
 void	free_all_philo(t_philo *st_philo);
 void	*monitor_routine(void *arg);
+void	wait_ms(size_t ms);
 
 #endif

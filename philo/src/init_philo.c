@@ -18,6 +18,7 @@ static void	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 	philo->philo_values = st_philo->philo_values;
 	philo->dead_lock = st_philo->dead_lock;
 	philo->philo_died = &st_philo->philo_died;
+	philo->start_time = &st_philo->start_time;
 	philo->left_fork = &st_philo->fork_list[i];
 	if (i == st_philo->philo_values[NB_PHILO] - 1)
 		philo->righ_fork = &st_philo->fork_list[0];
