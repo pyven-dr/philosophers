@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 DFLAGS = -MD -MP
 
@@ -17,6 +17,9 @@ SRC = main.c \
 	  get_time.c \
 	  init_philo.c \
 	  init_fork_list.c \
+	  create_thread.c \
+	  philo_routine.c \
+	  free_all_philo.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
 
 

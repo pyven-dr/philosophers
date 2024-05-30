@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_fork_list.c                                   :+:      :+:    :+:   */
+/*   free_all_philo.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 04:42:28 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/29 04:42:28 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/30 01:44:54 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/30 01:44:54 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	init_fork_list(t_philo *st_philo)
+void	free_all_philo(t_philo *st_philo)
 {
-	t_fork	*fork_list;
-	int		i;
+	int	i;
 
 	i = 0;
-	fork_list = malloc(sizeof(t_fork) * st_philo->philo_values[NB_PHILO]);
-	if (fork_list == NULL)
-		return (1);
+	free(st_philo->philo_list);
 	while (i < st_philo->philo_values[NB_PHILO])
 	{
-		fork_list[i].is_taken = false;
-		pthread_mutex_init(&fork_list[i].mutex, NULL);
+		pthread_mutex_destroy(&st_philo->fork_list[i].mutex);
 		i++;
 	}
-	st_philo->fork_list = fork_list;
-	return (0);
+	free(st_philo->fork_list);
 }

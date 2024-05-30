@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_fork_list.c                                   :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 04:42:28 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/29 04:42:28 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/30 00:48:55 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/30 00:48:55 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "philosophers.h"
+#include <stdio.h>
 
-int	init_fork_list(t_philo *st_philo)
+void	*philo_routine(void *arg)
 {
-	t_fork	*fork_list;
-	int		i;
+	t_philosopher	*philosopher;
 
-	i = 0;
-	fork_list = malloc(sizeof(t_fork) * st_philo->philo_values[NB_PHILO]);
-	if (fork_list == NULL)
-		return (1);
-	while (i < st_philo->philo_values[NB_PHILO])
-	{
-		fork_list[i].is_taken = false;
-		pthread_mutex_init(&fork_list[i].mutex, NULL);
-		i++;
-	}
-	st_philo->fork_list = fork_list;
-	return (0);
+	philosopher = (t_philosopher *)arg;
+	pthread_mutex_lock(philosopher->start_lock);
+	printf("Thread %d created at %zu\n", philosopher->id, get_time());
+	pthread_mutex_unlock(philosopher->start_lock);
+	return (NULL);
 }

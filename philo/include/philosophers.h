@@ -51,12 +51,15 @@ typedef struct s_philo
 	t_fork			*fork_list;
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*start_lock;
-	bool			*philo_died;
+	bool			philo_died;
 }	t_philo;
 
 int		parsing(int argc, char **argv, t_philo *philo_struct);
 size_t	get_time(void);
 int		init_fork_list(t_philo *st_philo);
 int		init_all_philos(t_philo *st_philo, pthread_mutex_t *dead_lock);
+void	*philo_routine(void *arg);
+int		launch_sim(t_philo *st_philo);
+void	free_all_philo(t_philo *st_philo);
 
 #endif
