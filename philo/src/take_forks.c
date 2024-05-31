@@ -38,6 +38,7 @@ int	take_forks(t_philosopher *philosopher)
 	take_one_fork(philosopher->left_fork);
 	if (print_state_change(PHILO_FORK, philosopher) == 1)
 	{
+		
 		drop_one_fork(philosopher->left_fork);
 		return (1);
 	}
