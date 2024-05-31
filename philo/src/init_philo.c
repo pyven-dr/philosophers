@@ -21,9 +21,9 @@ static void	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 	philo->start_time = &st_philo->start_time;
 	philo->left_fork = &st_philo->fork_list[i];
 	if (i == st_philo->philo_values[NB_PHILO] - 1)
-		philo->righ_fork = &st_philo->fork_list[0];
+		philo->right_fork = &st_philo->fork_list[0];
 	else
-		philo->righ_fork = &st_philo->fork_list[i + 1];
+		philo->right_fork = &st_philo->fork_list[i + 1];
 }
 
 int	init_all_philos(t_philo *st_philo, pthread_mutex_t *dead_lock)

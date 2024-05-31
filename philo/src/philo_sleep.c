@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_eat.c                                        :+:      :+:    :+:   */
+/*   philo_sleep.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 04:57:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/30 04:57:16 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/31 01:09:12 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/31 01:09:12 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "philo_states.h"
 
-int	philo_eat(t_philosopher *philosopher)
+int	philo_sleep(t_philosopher *philosopher)
 {
-	if (take_forks(philosopher) == 1)
-		return (1);
-	if (print_state_change(PHILO_EAT, philosopher) == 1)
-	{
-		drop_one_fork(philosopher->left_fork);
-		drop_one_fork(philosopher->right_fork);
-		return (1);
-	}
-	philosopher->last_meal = get_time();
-	wait_ms(philosopher->philo_values[TIME_TO_EAT]);
-	drop_one_fork(philosopher->left_fork);
-	drop_one_fork(philosopher->right_fork);
+	print_state_change(PHILO_SLEEP, philosopher);
+	wait_ms(philosopher->philo_values[TIME_TO_SLEEP]);
 	return (0);
 }

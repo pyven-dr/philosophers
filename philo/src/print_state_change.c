@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_eat.c                                        :+:      :+:    :+:   */
+/*   print_state_change.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 04:57:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/30 04:57:16 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/31 02:09:05 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/31 02:09:05 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
 #include "philo_states.h"
+#include "philosophers.h"
 
-int	philo_eat(t_philosopher *philosopher)
+int	print_state_change(char *state, t_philosopher *philosopher)
 {
-	if (take_forks(philosopher) == 1)
-		return (1);
-	if (print_state_change(PHILO_EAT, philosopher) == 1)
+	pthread_mutex_lock(philosopher->dead_lock);
+	if (*philosopher->philo_died == true)
 	{
-		drop_one_fork(philosopher->left_fork);
-		drop_one_fork(philosopher->right_fork);
+		pthread_mutex_unlock(philosopher->dead_lock);
 		return (1);
 	}
-	philosopher->last_meal = get_time();
-	wait_ms(philosopher->philo_values[TIME_TO_EAT]);
-	drop_one_fork(philosopher->left_fork);
-	drop_one_fork(philosopher->right_fork);
+	printf(state, get_time() - *philosopher->start_time, philosopher->id);
+	pthread_mutex_unlock(philosopher->dead_lock);
 	return (0);
 }

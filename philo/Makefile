@@ -23,6 +23,9 @@ SRC = main.c \
 	  monitor_routine.c \
 	  philo_eat.c \
 	  wait_ms.c \
+	  philo_sleep.c \
+	  take_forks.c \
+	  print_state_change.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
 
 
