@@ -50,3 +50,4 @@ int	take_forks(t_philosopher *philosopher)
 	}
 	return (0);
 }
+
