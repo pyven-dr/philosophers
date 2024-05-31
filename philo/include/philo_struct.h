@@ -13,8 +13,8 @@
 #ifndef PHILO_STRUCT_H
 # define PHILO_STRUCT_H
 
-#include <pthread.h>
-#include <stdbool.h>
+# include <pthread.h>
+# include <stdbool.h>
 
 typedef struct s_fork
 {

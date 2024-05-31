@@ -36,13 +36,13 @@ void	drop_one_fork(t_fork *fork)
 int	take_forks(t_philosopher *philosopher)
 {
 	take_one_fork(philosopher->left_fork);
-	if (print_state_change(PHILO_FORK ,philosopher) == 1)
+	if (print_state_change(PHILO_FORK, philosopher) == 1)
 	{
 		drop_one_fork(philosopher->left_fork);
 		return (1);
 	}
 	take_one_fork(philosopher->right_fork);
-	if (print_state_change(PHILO_FORK ,philosopher) == 1)
+	if (print_state_change(PHILO_FORK, philosopher) == 1)
 	{
 		drop_one_fork(philosopher->left_fork);
 		drop_one_fork(philosopher->right_fork);
