@@ -23,7 +23,9 @@ int	philo_eat(t_philosopher *philosopher)
 		drop_one_fork(philosopher->right_fork);
 		return (1);
 	}
+	pthread_mutex_lock(&philosopher->last_meal_lock);
 	philosopher->last_meal = get_time();
+	pthread_mutex_unlock(&philosopher->last_meal_lock);
 	wait_ms(philosopher->philo_values[TIME_TO_EAT]);
 	drop_one_fork(philosopher->left_fork);
 	drop_one_fork(philosopher->right_fork);

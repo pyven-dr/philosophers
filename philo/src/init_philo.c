@@ -27,6 +27,11 @@ static int	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 		philo->right_fork = &st_philo->fork_list[i + 1];
 	if (pthread_mutex_init(&philo->nb_eat_lock, NULL) != 0)
 		return (1);
+	if (pthread_mutex_init(&philo->last_meal_lock, NULL) != 0)
+	{
+		pthread_mutex_destroy(&philo->nb_eat_lock);
+		return (1);
+	}
 	return (0);
 }
 

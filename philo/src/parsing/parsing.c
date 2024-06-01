@@ -13,7 +13,7 @@
 #include "philo_parsing.h"
 #include "philosophers.h"
 #include <limits.h>
-#include <stdio.h>
+
 int	fill_struct(int argc, char **argv, t_philo *philo_struct)
 {
 	int		i;

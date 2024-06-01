@@ -22,6 +22,7 @@
 # define TIME_TO_EAT 2
 # define TIME_TO_SLEEP 3
 # define NB_TIME_MUST_EAT 4
+# define PHILO_DIED "\e[31m%zu %d died\n\e[0m"
 
 int		parsing(int argc, char **argv, t_philo *philo_struct);
 size_t	get_time(void);

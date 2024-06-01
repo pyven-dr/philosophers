@@ -43,5 +43,4 @@ void	*philo_routine(void *arg)
 		if (print_state_change(PHILO_THINK, philosopher) == 1)
 			return (NULL);
 	}
-	return (NULL);
 }
