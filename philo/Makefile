@@ -13,20 +13,22 @@ SRC_PARSING = parsing.c \
               ft_isdigit.c \
               check_args.c
 
+SRC_ROUTINE = philo_eat.c \
+			  philo_routine.c \
+			  philo_sleep.c \
+			  print_state_change.c \
+			  take_forks.c
+
 SRC = main.c \
 	  get_time.c \
 	  init_philo.c \
 	  init_fork_list.c \
 	  create_thread.c \
-	  philo_routine.c \
 	  free_all_philo.c \
 	  monitor_routine.c \
-	  philo_eat.c \
 	  wait_ms.c \
-	  philo_sleep.c \
-	  take_forks.c \
-	  print_state_change.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
+	  $(addprefix routine/, $(SRC_ROUTINE))
 
 
 BUILD_DIR = .build

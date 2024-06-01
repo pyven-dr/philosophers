@@ -13,26 +13,35 @@
 #include "philosophers.h"
 #include "philo_states.h"
 
+static int	init_philo_routine(t_philosopher *philosopher)
+{
+	pthread_mutex_lock(philosopher->start_lock);
+	philosopher->last_meal = *philosopher->start_time;
+	pthread_mutex_unlock(philosopher->start_lock);
+	if (philosopher->id % 2 == 1)
+	{
+		if (print_state_change(PHILO_THINK, philosopher) == 1)
+			return (1);
+		wait_ms(philosopher->philo_values[TIME_TO_EAT] / 2);
+	}
+	return (0);
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philosopher	*philosopher;
 
 	philosopher = (t_philosopher *)arg;
-	pthread_mutex_lock(philosopher->start_lock);
-	philosopher->last_meal = *philosopher->start_time;
-	pthread_mutex_unlock(philosopher->start_lock);
-	if (philosopher->id % 2 == 0)
+	if (init_philo_routine(philosopher) == 1)
+		return (NULL);
+	while (true)
 	{
-		philo_eat(philosopher);
-		philo_sleep(philosopher);
-		print_state_change(PHILO_THINK, philosopher);
-	}
-	else
-	{
-		print_state_change(PHILO_THINK, philosopher);
-		wait_ms(philosopher->philo_values[TIME_TO_EAT] + 10);
-		philo_eat(philosopher);
-		philo_sleep(philosopher);
+		if (philo_eat(philosopher) == 1)
+			return (NULL);
+		if (philo_sleep(philosopher) == 1)
+			return (NULL);
+		if (print_state_change(PHILO_THINK, philosopher) == 1)
+			return (NULL);
 	}
 	return (NULL);
 }
