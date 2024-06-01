@@ -27,5 +27,8 @@ int	philo_eat(t_philosopher *philosopher)
 	wait_ms(philosopher->philo_values[TIME_TO_EAT]);
 	drop_one_fork(philosopher->left_fork);
 	drop_one_fork(philosopher->right_fork);
+	pthread_mutex_lock(&philosopher->nb_eat_lock);
+	philosopher->nb_eat--;
+	pthread_mutex_unlock(&philosopher->nb_eat_lock);
 	return (0);
 }

@@ -13,7 +13,7 @@
 #include "philo_parsing.h"
 #include "philosophers.h"
 #include <limits.h>
-
+#include <stdio.h>
 int	fill_struct(int argc, char **argv, t_philo *philo_struct)
 {
 	int		i;
@@ -32,7 +32,7 @@ int	fill_struct(int argc, char **argv, t_philo *philo_struct)
 		i++;
 	}
 	if (argc == 5)
-		philo_struct->philo_values[NB_TIME_MUST_EAT] = 0;
+		philo_struct->philo_values[NB_TIME_MUST_EAT] = -1;
 	return (0);
 }
 

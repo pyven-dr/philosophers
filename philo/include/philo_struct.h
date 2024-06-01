@@ -34,7 +34,8 @@ typedef struct s_philosopher
 	pthread_mutex_t	*start_lock;
 	pthread_mutex_t	*dead_lock;
 	bool			*philo_died;
-
+	int				nb_eat;
+	pthread_mutex_t	nb_eat_lock;
 }	t_philosopher;
 
 typedef struct s_philo
