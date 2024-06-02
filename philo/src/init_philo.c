@@ -21,7 +21,9 @@ static int	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 	philo->start_time = &st_philo->start_time;
 	philo->nb_eat = st_philo->philo_values[NB_TIME_MUST_EAT];
 	philo->left_fork = &st_philo->fork_list[i];
-	if (i == st_philo->philo_values[NB_PHILO] - 1)
+	if (st_philo->philo_values[NB_PHILO] == 1)
+		philo->right_fork = NULL;
+	else if (i == st_philo->philo_values[NB_PHILO] - 1)
 		philo->right_fork = &st_philo->fork_list[0];
 	else
 		philo->right_fork = &st_philo->fork_list[i + 1];
