@@ -24,7 +24,7 @@ static int	philo_died(int i, t_philo *st_philo)
 
 static int	check_nb_eat(int philo_nb_eat, t_philo *st_philo)
 {
-	if (philo_nb_eat == 0)
+	if (philo_nb_eat == 0 && st_philo->philo_values[NB_TIME_MUST_EAT] != -1)
 	{
 		pthread_mutex_lock(st_philo->dead_lock);
 		st_philo->philo_died = true;
