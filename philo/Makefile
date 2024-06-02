@@ -19,16 +19,20 @@ SRC_ROUTINE = philo_eat.c \
 			  print_state_change.c \
 			  take_forks.c
 
+SRC_MONITOR = monitor_routine.c \
+			  check_philo_died.c
+
 SRC = main.c \
 	  get_time.c \
 	  init_philo.c \
 	  init_fork_list.c \
 	  create_thread.c \
 	  free_all_philo.c \
-	  monitor_routine.c \
 	  wait_ms.c \
+	  launch_sim.c \
 	  $(addprefix parsing/, $(SRC_PARSING)) \
-	  $(addprefix routine/, $(SRC_ROUTINE))
+	  $(addprefix routine/, $(SRC_ROUTINE)) \
+	  $(addprefix monitor/, $(SRC_MONITOR))
 
 
 BUILD_DIR = .build

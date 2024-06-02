@@ -30,7 +30,8 @@ int	philo_eat(t_philosopher *philosopher)
 	drop_one_fork(philosopher->left_fork);
 	drop_one_fork(philosopher->right_fork);
 	pthread_mutex_lock(&philosopher->nb_eat_lock);
-	philosopher->nb_eat--;
+	if (philosopher->nb_eat > 0)
+		philosopher->nb_eat--;
 	pthread_mutex_unlock(&philosopher->nb_eat_lock);
 	return (0);
 }

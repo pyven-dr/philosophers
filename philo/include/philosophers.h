@@ -22,7 +22,6 @@
 # define TIME_TO_EAT 2
 # define TIME_TO_SLEEP 3
 # define NB_TIME_MUST_EAT 4
-# define PHILO_DIED "\e[31m%zu %d died\n\e[0m"
 
 int		parsing(int argc, char **argv, t_philo *philo_struct);
 size_t	get_time(void);
@@ -31,7 +30,7 @@ int		init_all_philos(t_philo *st_philo, pthread_mutex_t *dead_lock);
 void	*philo_routine(void *arg);
 int		launch_sim(t_philo *st_philo);
 void	free_all_philo(t_philo *st_philo);
-void	*monitor_routine(void *arg);
 void	wait_ms(size_t ms);
+int		create_thread(t_philo *st_philo, pthread_mutex_t *start_lock);
 
 #endif
