@@ -19,7 +19,7 @@ static void	take_one_fork(t_fork *fork)
 	while (fork->is_taken == true)
 	{
 		pthread_mutex_unlock(&fork->mutex);
-		wait_ms(1);
+		usleep(10);
 		pthread_mutex_lock(&fork->mutex);
 	}
 	fork->is_taken = true;

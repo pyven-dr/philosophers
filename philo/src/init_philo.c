@@ -18,7 +18,6 @@ static int	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 	philo->philo_values = st_philo->philo_values;
 	philo->dead_lock = st_philo->dead_lock;
 	philo->philo_died = &st_philo->philo_died;
-	philo->start_time = &st_philo->start_time;
 	philo->nb_eat = st_philo->philo_values[NB_TIME_MUST_EAT];
 	philo->left_fork = &st_philo->fork_list[i];
 	if (st_philo->philo_values[NB_PHILO] == 1)
@@ -29,7 +28,7 @@ static int	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 		philo->right_fork = &st_philo->fork_list[i + 1];
 	if (pthread_mutex_init(&philo->nb_eat_lock, NULL) != 0)
 		return (1);
-	if (pthread_mutex_init(&philo->last_meal_lock, NULL) != 0)
+	if (pthread_mutex_init(&philo->next_meal_lock, NULL) != 0)
 	{
 		pthread_mutex_destroy(&philo->nb_eat_lock);
 		return (1);

@@ -41,6 +41,7 @@ int	create_monitoring(t_philo *st_philo, pthread_mutex_t *start_lock)
 		pthread_mutex_unlock(st_philo->dead_lock);
 		return (1);
 	}
+	pthread_mutex_unlock(start_lock);
 	pthread_join(monitor, NULL);
 	return (0);
 }

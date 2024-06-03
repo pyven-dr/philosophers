@@ -21,7 +21,7 @@ int	print_state_change(char *state, t_philosopher *philosopher)
 		pthread_mutex_unlock(philosopher->dead_lock);
 		return (1);
 	}
-	printf(state, get_time() - *philosopher->start_time, philosopher->id);
+	printf(state, get_time() - philosopher->start_time, philosopher->id);
 	pthread_mutex_unlock(philosopher->dead_lock);
 	return (0);
 }

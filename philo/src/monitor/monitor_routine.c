@@ -18,9 +18,7 @@ void	*monitor_routine(void *arg)
 	t_philo	*st_philo;
 
 	st_philo = (t_philo *)arg;
-	st_philo->start_time = get_time();
-	pthread_mutex_unlock(st_philo->start_lock);
-	wait_ms(50);
+	wait_ms(st_philo->philo_values[TIME_TO_EAT / 2]);
 	while (true)
 		if (check_philo_died(st_philo) == 1)
 			return (NULL);

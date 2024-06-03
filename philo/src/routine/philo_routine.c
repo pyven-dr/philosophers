@@ -16,8 +16,12 @@
 static int	init_philo_routine(t_philosopher *philosopher)
 {
 	pthread_mutex_lock(philosopher->start_lock);
-	philosopher->last_meal = *philosopher->start_time;
 	pthread_mutex_unlock(philosopher->start_lock);
+	philosopher->start_time = get_time();
+	pthread_mutex_lock(&philosopher->next_meal_lock);
+	philosopher->next_meal = philosopher->start_time + \
+							philosopher->philo_values[TIME_TO_DIE];
+	pthread_mutex_unlock(&philosopher->next_meal_lock);
 	if (philosopher->id % 2 == 1)
 	{
 		if (print_state_change(PHILO_THINK, philosopher) == 1)

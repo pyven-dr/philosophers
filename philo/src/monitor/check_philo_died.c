@@ -18,7 +18,7 @@ static int	philo_died(int i, t_philo *st_philo)
 	pthread_mutex_lock(st_philo->dead_lock);
 	st_philo->philo_died = true;
 	pthread_mutex_unlock(st_philo->dead_lock);
-	printf(PHILO_DIED, get_time() - st_philo->start_time, i + 1);
+	printf(PHILO_DIED, get_time() - st_philo->philo_list[i].start_time, i + 1);
 	return (1);
 }
 
@@ -43,14 +43,13 @@ int	check_philo_died(t_philo *st_philo)
 	philo_nb_eat = 0;
 	while (i < st_philo->philo_values[NB_PHILO])
 	{
-		pthread_mutex_lock(&st_philo->philo_list[i].last_meal_lock);
-		if (get_time() - st_philo->philo_list[i].last_meal >= \
-			(size_t)st_philo->philo_values[TIME_TO_DIE])
+		pthread_mutex_lock(&st_philo->philo_list[i].next_meal_lock);
+		if (get_time() >= st_philo->philo_list[i].next_meal)
 		{
-			pthread_mutex_unlock(&st_philo->philo_list[i].last_meal_lock);
+			pthread_mutex_unlock(&st_philo->philo_list[i].next_meal_lock);
 			return (philo_died(i, st_philo));
 		}
-		pthread_mutex_unlock(&st_philo->philo_list[i].last_meal_lock);
+		pthread_mutex_unlock(&st_philo->philo_list[i].next_meal_lock);
 		pthread_mutex_lock(&st_philo->philo_list[i].nb_eat_lock);
 		if (st_philo->philo_values[NB_TIME_MUST_EAT] != -1)
 			philo_nb_eat += st_philo->philo_list[i].nb_eat;
