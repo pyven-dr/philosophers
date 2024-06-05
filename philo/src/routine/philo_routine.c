@@ -39,6 +39,8 @@ void	*philo_routine(void *arg)
 	{
 		if (philo_eat(philosopher) == 1)
 			return (NULL);
+		if (philosopher->nb_eat == 0)
+			return (NULL);
 		if (philo_sleep(philosopher) == 1)
 			return (NULL);
 		if (print_state_change(PHILO_THINK, philosopher) == 1)
