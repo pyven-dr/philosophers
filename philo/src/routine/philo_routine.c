@@ -30,20 +30,29 @@ static int	init_philo_routine(t_philosopher *philosopher)
 
 void	*philo_routine(void *arg)
 {
-	t_philosopher	*philosopher;
+	t_philosopher	*philo;
 
-	philosopher = (t_philosopher *)arg;
-	if (init_philo_routine(philosopher) == 1)
+	philo = (t_philosopher *)arg;
+	if (init_philo_routine(philo) == 1)
 		return (NULL);
+	if (philo->right_fork == NULL)
+	{
+		if (print_state_change(PHILO_FORK, philo) == 1)
+			return (NULL);
+		wait_ms(philo->philo_values[TIME_TO_DIE] - \
+				(get_time() - philo->start_time));
+		printf(PHILO_DIED, get_time() - philo->start_time, philo->id);
+		return (NULL);
+	}
 	while (true)
 	{
-		if (philo_eat(philosopher) == 1)
+		if (philo_eat(philo) == 1)
 			return (NULL);
-		if (philosopher->nb_eat == 0)
+		if (philo->nb_eat == 0)
 			return (NULL);
-		if (philo_sleep(philosopher) == 1)
+		if (philo_sleep(philo) == 1)
 			return (NULL);
-		if (print_state_change(PHILO_THINK, philosopher) == 1)
+		if (print_state_change(PHILO_THINK, philo) == 1)
 			return (NULL);
 	}
 }
