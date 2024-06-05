@@ -13,26 +13,42 @@
 #include "philosophers.h"
 #include "philo_states.h"
 
-int	philo_eat(t_philosopher *philosopher)
+static int	check_philo_died(t_philosopher *philo)
 {
-	if (take_forks(philosopher) == 1)
-		return (1);
-	if (print_state_change(PHILO_EAT, philosopher) == 1)
+	if (philo->philo_values[TIME_TO_EAT] >= philo->philo_values[TIME_TO_DIE])
 	{
-		drop_one_fork(philosopher->left_fork);
-		drop_one_fork(philosopher->right_fork);
+		wait_ms(philo->philo_values[TIME_TO_DIE]);
+		pthread_mutex_lock(philo->dead_lock);
+		if (*philo->philo_died == false)
+			printf(PHILO_DIED, get_time() - philo->start_time, philo->id);
+		*philo->philo_died = true;
+		pthread_mutex_unlock(philo->dead_lock);
 		return (1);
 	}
-	pthread_mutex_lock(&philosopher->next_meal_lock);
-	philosopher->next_meal = get_time() + \
-							philosopher->philo_values[TIME_TO_DIE];
-	pthread_mutex_unlock(&philosopher->next_meal_lock);
-	wait_ms(philosopher->philo_values[TIME_TO_EAT]);
-	drop_one_fork(philosopher->left_fork);
-	drop_one_fork(philosopher->right_fork);
-	pthread_mutex_lock(&philosopher->nb_eat_lock);
-	if (philosopher->nb_eat > 0)
-		philosopher->nb_eat--;
-	pthread_mutex_unlock(&philosopher->nb_eat_lock);
+	return (0);
+}
+
+int	philo_eat(t_philosopher *philo)
+{
+	if (take_forks(philo) == 1)
+		return (1);
+	if (print_state_change(PHILO_EAT, philo) == 1)
+	{
+		drop_one_fork(philo->left_fork);
+		drop_one_fork(philo->right_fork);
+		return (1);
+	}
+	philo->last_meal = get_time();
+	if (check_philo_died(philo) == 1)
+	{
+		drop_one_fork(philo->left_fork);
+		drop_one_fork(philo->right_fork);
+		return (1);
+	}
+	wait_ms(philo->philo_values[TIME_TO_EAT]);
+	drop_one_fork(philo->left_fork);
+	drop_one_fork(philo->right_fork);
+	if (philo->nb_eat > 0)
+		philo->nb_eat--;
 	return (0);
 }

@@ -28,15 +28,13 @@ typedef struct s_philosopher
 	int				id;
 	int				*philo_values;
 	size_t			start_time;
-	size_t			next_meal;
-	pthread_mutex_t	next_meal_lock;
+	size_t			last_meal;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
 	pthread_mutex_t	*start_lock;
 	pthread_mutex_t	*dead_lock;
 	bool			*philo_died;
 	int				nb_eat;
-	pthread_mutex_t	nb_eat_lock;
 }	t_philosopher;
 
 typedef struct s_philo

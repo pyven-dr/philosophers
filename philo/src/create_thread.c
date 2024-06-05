@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include "monitor.h"
 
 int	create_thread(t_philo *st_philo, pthread_mutex_t *start_lock)
 {
@@ -26,22 +25,5 @@ int	create_thread(t_philo *st_philo, pthread_mutex_t *start_lock)
 			return (1);
 		i++;
 	}
-	return (0);
-}
-
-int	create_monitoring(t_philo *st_philo, pthread_mutex_t *start_lock)
-{
-	pthread_t	monitor;
-
-	st_philo->start_lock = start_lock;
-	if (pthread_create(&monitor, NULL, monitor_routine, st_philo) != 0)
-	{
-		pthread_mutex_lock(st_philo->dead_lock);
-		st_philo->philo_died = true;
-		pthread_mutex_unlock(st_philo->dead_lock);
-		return (1);
-	}
-	pthread_mutex_unlock(start_lock);
-	pthread_join(monitor, NULL);
 	return (0);
 }

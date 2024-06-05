@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-static int	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
+static void	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 {
 	philo->id = i + 1;
 	philo->philo_values = st_philo->philo_values;
@@ -26,14 +26,6 @@ static int	init_philo(t_philosopher *philo, t_philo *st_philo, int i)
 		philo->right_fork = &st_philo->fork_list[0];
 	else
 		philo->right_fork = &st_philo->fork_list[i + 1];
-	if (pthread_mutex_init(&philo->nb_eat_lock, NULL) != 0)
-		return (1);
-	if (pthread_mutex_init(&philo->next_meal_lock, NULL) != 0)
-	{
-		pthread_mutex_destroy(&philo->nb_eat_lock);
-		return (1);
-	}
-	return (0);
 }
 
 int	init_philo_struct(t_philo *st_philo, pthread_mutex_t *dead_lock)
@@ -67,12 +59,7 @@ int	init_all_philos(t_philo *st_philo, pthread_mutex_t *dead_lock)
 		return (1);
 	while (i < st_philo->philo_values[NB_PHILO])
 	{
-		if (init_philo(&st_philo->philo_list[i], st_philo, i) == 1)
-		{
-			pthread_mutex_destroy(dead_lock);
-			free(st_philo->philo_list);
-			return (1);
-		}
+		init_philo(&st_philo->philo_list[i], st_philo, i);
 		i++;
 	}
 	return (0);

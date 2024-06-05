@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include "monitor.h"
 
 int	join_thread(t_philo *st_philo)
 {
@@ -42,11 +41,7 @@ int	launch_sim(t_philo *st_philo)
 		pthread_mutex_destroy(&start_lock);
 		return (1);
 	}
-	if (create_monitoring(st_philo, &start_lock) == 1)
-	{
-		join_thread(st_philo);
-		return (1);
-	}
+	pthread_mutex_unlock(&start_lock);
 	join_thread(st_philo);
 	pthread_mutex_destroy(&start_lock);
 	return (0);

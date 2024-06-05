@@ -18,5 +18,5 @@ void	wait_ms(size_t ms)
 
 	start_time = get_time();
 	while ((get_time() - start_time) < ms)
-		usleep(50);
+		usleep(400);
 }
